@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Política de Privacidad de BioVault – Gestor de contraseñas seguro con arquitectura de conocimiento cero. Sepa cómo protegemos sus datos." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Política de Privacidad · BioVault" />
+  <meta property="og:description" content="Transparencia total sobre cómo BioVault gestiona y protege su información personal bajo un modelo Zero-Knowledge." />
+  <meta property="og:type" content="website" />
+  <title>Política de Privacidad · BioVault</title>
+
+  <!-- Favicon SVG inline -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230A0F1E'/><path d='M16 6C12.69 6 10 8.69 10 12v1H8v13h16V13h-2v-1c0-3.31-2.69-6-6-6zm0 2c2.21 0 4 1.79 4 4v1h-8v-1c0-2.21 1.79-4 4-4zm0 8c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z' fill='%2300C896'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── DESIGN TOKENS ──────────────────────────────────────────── */
+    :root {
+      --bg-base:        #060B17;
+      --bg-surface:     #0C1322;
+      --bg-card:        #101928;
+      --bg-card-hover:  #141F31;
+      --border:         rgba(255,255,255,0.06);
+      --border-accent:  rgba(0,200,150,0.25);
+      --accent:         #00C896;
+      --accent-dim:     rgba(0,200,150,0.12);
+      --accent-glow:    rgba(0,200,150,0.35);
+      --blue:           #4A9EFF;
+      --blue-dim:       rgba(74,158,255,0.10);
+      --text-primary:   #E8EEF8;
+      --text-secondary: #8A9BB8;
+      --text-muted:     #4A5A72;
+      --mono:           'IBM Plex Mono', monospace;
+      --sans:           'IBM Plex Sans', sans-serif;
+      --serif:          'Playfair Display', serif;
+      --radius-sm:      6px;
+      --radius-md:      12px;
+      --radius-lg:      20px;
+      --shadow-card:    0 1px 3px rgba(0,0,0,0.5), 0 8px 32px rgba(0,0,0,0.3);
+      --shadow-accent:  0 0 40px rgba(0,200,150,0.15);
+    }
+    /* ─── RESET & BASE ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body { font-family: var(--sans); background-color: var(--bg-base); color: var(--text-primary); font-size: 16px; line-height: 1.75; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.5; }
+    #progress-bar { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: linear-gradient(90deg, var(--accent), var(--blue)); z-index: 9999; transition: width 0.1s linear; box-shadow: 0 0 10px var(--accent-glow); }
+    .topnav { position: sticky; top: 0; z-index: 100; background: rgba(6,11,23,0.85); backdrop-filter: blur(20px) saturate(1.5); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .topnav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .topnav-logo { width: 32px; height: 32px; background: linear-gradient(135deg, #00C896, #0A8C60); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .topnav-logo svg { width: 18px; height: 18px; }
+    .topnav-name { font-family: var(--mono); font-weight: 600; font-size: 1rem; color: var(--text-primary); letter-spacing: 0.04em; }
+    .topnav-name span { color: var(--accent); }
+    .topnav-badge { font-family: var(--mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--border-accent); padding: 4px 12px; border-radius: 100px; }
+    .hero { position: relative; padding: 100px 2rem 80px; text-align: center; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; pointer-events: none; }
+    .hero-bg::before { content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 700px; height: 700px; background: radial-gradient(ellipse, rgba(0,200,150,0.10) 0%, transparent 65%); }
+    .hero-bg::after { content: ''; position: absolute; top: 40px; left: 30%; width: 400px; height: 400px; background: radial-gradient(ellipse, rgba(74,158,255,0.06) 0%, transparent 70%); }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 100%); }
+    .hero-content { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--border-accent); padding: 5px 16px; border-radius: 100px; margin-bottom: 28px; }
+    .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+    .hero-title { font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 3.8rem); font-weight: 900; line-height: 1.1; color: var(--text-primary); margin-bottom: 20px; letter-spacing: -0.01em; }
+    .hero-title .accent { color: var(--accent); }
+    .hero-subtitle { font-size: 1.05rem; color: var(--text-secondary); font-weight: 300; max-width: 520px; margin: 0 auto 32px; line-height: 1.8; }
+    .hero-meta { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 0.78rem; color: var(--text-muted); }
+    .hero-meta .dot { color: var(--text-muted); }
+    .hero-lock { width: 80px; height: 80px; margin: 0 auto 36px; background: linear-gradient(135deg, rgba(0,200,150,0.15), rgba(0,200,150,0.05)); border: 1px solid var(--border-accent); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 60px rgba(0,200,150,0.12), var(--shadow-card); position: relative; }
+    .hero-lock::before { content: ''; position: absolute; inset: -1px; border-radius: 21px; background: linear-gradient(135deg, rgba(0,200,150,0.3), transparent, rgba(74,158,255,0.2)); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask-composite: exclude; padding: 1px; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    .layout { display: grid; grid-template-columns: 240px 1fr; gap: 48px; align-items: start; padding-bottom: 120px; }
+    .sidebar { position: sticky; top: 88px; }
+    .sidebar-title { font-family: var(--mono); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; padding-left: 12px; }
+    .sidebar-nav { list-style: none; }
+    .sidebar-nav li { margin-bottom: 2px; }
+    .sidebar-nav a { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: var(--radius-sm); text-decoration: none; font-size: 0.82rem; font-weight: 400; color: var(--text-secondary); transition: all 0.2s ease; border-left: 2px solid transparent; }
+    .sidebar-nav a:hover { color: var(--text-primary); background: rgba(255,255,255,0.04); }
+    .sidebar-nav a.active { color: var(--accent); background: var(--accent-dim); border-left-color: var(--accent); font-weight: 500; }
+    .sidebar-nav .nav-num { font-family: var(--mono); font-size: 0.65rem; color: var(--text-muted); min-width: 18px; }
+    .sidebar-nav a.active .nav-num { color: var(--accent); opacity: 0.7; }
+    .sidebar-divider { height: 1px; background: var(--border); margin: 16px 12px; }
+    .sidebar-last-update { padding: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); margin-top: 8px; }
+    .sidebar-last-update p { font-family: var(--mono); font-size: 0.68rem; color: var(--text-muted); line-height: 1.6; }
+    .sidebar-last-update strong { display: block; color: var(--text-secondary); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .main-content { min-width: 0; }
+    .zk-banner { background: linear-gradient(135deg, rgba(0,200,150,0.08), rgba(74,158,255,0.05)); border: 1px solid var(--border-accent); border-radius: var(--radius-lg); padding: 32px; margin-bottom: 48px; position: relative; overflow: hidden; }
+    .zk-banner::before { content: 'ZERO-KNOWLEDGE'; position: absolute; right: -20px; top: 50%; transform: translateY(-50%) rotate(90deg); font-family: var(--mono); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.3em; color: rgba(0,200,150,0.12); }
+    .zk-banner-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .zk-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--accent), #00A070); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 20px rgba(0,200,150,0.3); }
+    .zk-icon svg { width: 22px; height: 22px; }
+    .zk-banner-title { font-family: var(--serif); font-size: 1.3rem; font-weight: 700; color: var(--text-primary); }
+    .zk-tag { font-family: var(--mono); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--border-accent); padding: 2px 8px; border-radius: 4px; margin-left: 8px; }
+    .zk-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .zk-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.92rem; color: var(--text-secondary); }
+    .zk-list li::before { content: '→'; font-family: var(--mono); color: var(--accent); font-size: 0.85rem; margin-top: 2px; flex-shrink: 0; }
+    .policy-section { margin-bottom: 48px; scroll-margin-top: 88px; }
+    .section-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px; transition: border-color 0.3s ease; }
+    .section-card:hover { border-color: rgba(255,255,255,0.1); }
+    .section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .section-num { font-family: var(--mono); font-size: 0.7rem; font-weight: 600; color: var(--text-muted); background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 6px; padding: 4px 9px; letter-spacing: 0.05em; }
+    .section-icon { width: 38px; height: 38px; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .section-icon svg { width: 19px; height: 19px; }
+    .icon-accent  { background: var(--accent-dim); }
+    .icon-blue    { background: var(--blue-dim); }
+    .icon-warn    { background: rgba(250,173,20,0.10); }
+    .section-title { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; color: var(--text-primary); line-height: 1.2; }
+    .section-body { font-size: 0.93rem; color: var(--text-secondary); }
+    .section-body p { margin-bottom: 14px; }
+    .section-body p:last-child { margin-bottom: 0; }
+    .highlight-box { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px 24px; margin: 20px 0; }
+    .highlight-box.green { background: var(--accent-dim); border-color: var(--border-accent); }
+    .highlight-box.blue { background: var(--blue-dim); border-color: rgba(74,158,255,0.2); }
+    .highlight-box p { margin: 0; font-size: 0.88rem; }
+    .highlight-box.green p { color: rgba(0,200,150,0.9); }
+    .highlight-box.blue p  { color: rgba(74,158,255,0.9); }
+    .hb-label { font-family: var(--mono); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+    .highlight-box.green .hb-label { color: var(--accent); }
+    .highlight-box.blue .hb-label  { color: var(--blue); }
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; margin: 20px 0; }
+    .data-table th { font-family: var(--mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-align: left; padding: 10px 16px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.02); }
+    .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); vertical-align: top; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .td-label { font-family: var(--mono); font-size: 0.8rem; color: var(--text-primary); font-weight: 500; }
+    .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+    .feature-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px; display: flex; align-items: flex-start; gap: 12px; }
+    .feature-item-icon { width: 32px; height: 32px; border-radius: 7px; background: var(--accent-dim); border: 1px solid var(--border-accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .feature-item-icon svg { width: 15px; height: 15px; }
+    .feature-item-text strong { display: block; font-size: 0.82rem; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+    .feature-item-text span { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+    .third-party-item { display: flex; align-items: flex-start; gap: 16px; padding: 18px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 10px; }
+    .tp-badge { font-family: var(--mono); font-size: 0.7rem; font-weight: 600; background: rgba(74,158,255,0.12); border: 1px solid rgba(74,158,255,0.2); color: var(--blue); padding: 4px 10px; border-radius: 6px; white-space: nowrap; letter-spacing: 0.05em; }
+    .tp-info strong { display: block; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 4px; }
+    .tp-info p { font-size: 0.83rem; color: var(--text-secondary); margin: 0; }
+    .tp-info a { color: var(--blue); text-decoration: none; font-size: 0.78rem; font-family: var(--mono); }
+    .tp-info a:hover { text-decoration: underline; }
+    .rights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+    .right-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 18px; }
+    .right-item-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .right-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .right-item strong { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); }
+    .right-item p { font-size: 0.8rem; color: var(--text-muted); margin: 0; line-height: 1.6; }
+    .contact-card { background: linear-gradient(135deg, rgba(0,200,150,0.06), rgba(74,158,255,0.04)); border: 1px solid var(--border-accent); border-radius: var(--radius-lg); padding: 36px; text-align: center; }
+    .contact-card h2 { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; }
+    .contact-card p { font-size: 0.92rem; color: var(--text-secondary); max-width: 420px; margin: 0 auto 28px; }
+    .contact-email { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 1rem; font-weight: 600; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--border-accent); padding: 14px 28px; border-radius: 100px; text-decoration: none; transition: all 0.2s ease; }
+    .contact-email:hover { background: rgba(0,200,150,0.2); box-shadow: 0 0 30px rgba(0,200,150,0.2); }
+    footer { background: var(--bg-surface); border-top: 1px solid var(--border); padding: 40px 2rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; }
+    .footer-logo { width: 28px; height: 28px; background: linear-gradient(135deg, #00C896, #0A8C60); border-radius: 7px; display: flex; align-items: center; justify-content: center; }
+    .footer-logo svg { width: 14px; height: 14px; }
+    .footer-name { font-family: var(--mono); font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
+    .footer-copy { font-size: 0.78rem; color: var(--text-muted); text-align: center; }
+    .footer-copy a { color: var(--text-muted); text-decoration: none; }
+    .footer-copy a:hover { color: var(--text-secondary); }
+    .footer-right { font-family: var(--mono); font-size: 0.72rem; color: var(--text-muted); text-align: right; }
+    .footer-right span { display: block; }
+    .intro-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px 36px; margin-bottom: 48px; }
+    .intro-card p { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 14px; line-height: 1.8; }
+    .intro-card p:last-child { margin-bottom: 0; }
+    .intro-card strong { color: var(--text-primary); font-weight: 600; }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; gap: 0; }
+      .sidebar { position: static; margin-bottom: 40px; }
+      .sidebar-nav { display: flex; flex-wrap: wrap; gap: 6px; }
+      .sidebar-nav li { margin: 0; }
+      .sidebar-nav a { border-left: none; border-bottom: 2px solid transparent; padding: 6px 12px; border-radius: 20px; background: var(--bg-card); font-size: 0.78rem; }
+      .sidebar-nav a.active { background: var(--accent-dim); border-left: none; border-bottom-color: transparent; }
+      .sidebar-title, .sidebar-divider, .sidebar-last-update { display: none; }
+      .feature-grid, .rights-grid { grid-template-columns: 1fr; }
+      .hero { padding: 64px 1.5rem 48px; }
+    }
+    @media (max-width: 600px) {
+      .topnav { padding: 0 1rem; }
+      .container { padding: 0 1rem; }
+      .section-card { padding: 24px 20px; }
+      .hero-title { font-size: 2rem; }
+      .contact-email { font-size: 0.85rem; padding: 12px 20px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .footer-right { text-align: left; }
+    }
+    .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<div id="progress-bar" role="progressbar" aria-hidden="true"></div>
+
+<nav class="topnav" role="banner" aria-label="Encabezado de BioVault">
+  <a href="#" class="topnav-brand" aria-label="BioVault">
+    <div class="topnav-logo" aria-hidden="true">
+      <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M10 2C7.24 2 5 4.24 5 7v1H3v10h14V8h-2V7c0-2.76-2.24-5-5-5zm0 2c1.66 0 3 1.34 3 3v1H7V7c0-1.66 1.34-3 3-3zm0 7a2 2 0 110 4 2 2 0 010-4z" fill="#fff"/>
+      </svg>
+    </div>
+    <span class="topnav-name">Bio<span>Vault</span></span>
+  </a>
+  <span class="topnav-badge">Política de Privacidad</span>
+</nav>
+
+<header class="hero" role="heading" aria-level="1">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-lock" aria-hidden="true">
+      <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 5C14.03 5 10 9.03 10 14v2H7v20h24V16h-3v-2c0-4.97-4.03-9-9-9zm0 3c3.31 0 6 2.69 6 6v2H13v-2c0-3.31 2.69-6 6-6zm0 12a3 3 0 110 6 3 3 0 010-6zm0 1.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" fill="#00C896"/>
+        <circle cx="19" cy="25" r="2" fill="#00C896" opacity="0.6"/>
+      </svg>
+    </div>
+    <div class="hero-eyebrow">Documento Legal · Vigente</div>
+    <h1 class="hero-title">Política de<br><span class="accent">Privacidad</span></h1>
+    <p class="hero-subtitle">
+      Transparencia total sobre cómo BioVault gestiona, protege y garantiza la seguridad de su información personal bajo un modelo de arquitectura Zero-Knowledge.
+    </p>
+    <p class="hero-meta">
+      <span>BioVault App</span>
+      <span class="dot">·</span>
+      <span>Última actualización: 10 de mayo de 2026</span>
+      <span class="dot">·</span>
+      <span>v2.1</span>
+    </p>
+  </div>
+</header>
+
+<main class="container" role="main">
+  <div class="layout">
+    <aside class="sidebar" aria-label="Navegación de secciones">
+      <p class="sidebar-title">Contenido</p>
+      <ul class="sidebar-nav" role="list">
+        <li><a href="#intro" class="active"><span class="nav-num">00</span> Introducción</a></li>
+        <li><a href="#zero-knowledge"><span class="nav-num">01</span> Zero-Knowledge</a></li>
+        <li><a href="#datos-recogidos"><span class="nav-num">02</span> Datos que recopilamos</a></li>
+        <li><a href="#permisos"><span class="nav-num">03</span> Permisos del dispositivo</a></li>
+        <li><a href="#uso-datos"><span class="nav-num">04</span> Uso de la información</a></li>
+        <li><a href="#terceros"><span class="nav-num">05</span> Terceros y proveedores</a></li>
+        <li><a href="#seguridad"><span class="nav-num">06</span> Seguridad</a></li>
+        <li><a href="#retencion"><span class="nav-num">07</span> Retención de datos</a></li>
+        <li><a href="#derechos"><span class="nav-num">08</span> Sus derechos</a></li>
+        <li><a href="#eliminacion"><span class="nav-num">09</span> Eliminación de cuenta</a></li>
+        <li><a href="#menores"><span class="nav-num">10</span> Privacidad infantil</a></li>
+        <li><a href="#cookies"><span class="nav-num">11</span> Cookies</a></li>
+        <li><a href="#cambios"><span class="nav-num">12</span> Cambios en la política</a></li>
+        <li><a href="#contacto"><span class="nav-num">13</span> Contacto</a></li>
+      </ul>
+
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-last-update">
+        <p><strong>Actualización</strong>10 de mayo de 2026</p>
+        <p style="margin-top:6px"><strong>Versión</strong>2.1</p>
+        <p style="margin-top:6px"><strong>Aplicación</strong>BioVault</p>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <!-- Intro -->
+      <section id="intro" class="policy-section fade-in" aria-labelledby="intro-title">
+        <div class="intro-card">
+          <p>
+            Bienvenido a <strong>BioVault</strong>. En BioVault, su seguridad no es una característica adicional: es el fundamento sobre el que construimos cada línea de código. Esta Política de Privacidad describe de forma clara y exhaustiva cómo gestionamos su información cuando utiliza nuestra aplicación móvil de gestión de contraseñas y datos sensibles.
+          </p>
+          <p>
+            Este documento ha sido redactado para cumplir rigurosamente con las <strong>Políticas del Programa para Desarrolladores de Google Play</strong>, el <strong>Reglamento General de Protección de Datos (RGPD/GDPR)</strong>, la <strong>Ley de Protección de la Privacidad Infantil en Línea (COPPA)</strong> y las mejores prácticas internacionales de privacidad digital.
+          </p>
+          <p>
+            Al descargar, instalar o utilizar BioVault, usted confirma que ha leído, comprendido y aceptado las prácticas descritas en esta política. Si no está de acuerdo con alguna parte de este documento, le solicitamos que deje de utilizar la aplicación y elimine su cuenta.
+          </p>
+        </div>
+      </section>
+
+      <!-- Zero Knowledge -->
+      <section id="zero-knowledge" class="policy-section fade-in" aria-labelledby="zk-title">
+        <div class="zk-banner">
+          <div class="zk-banner-header">
+            <div class="zk-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" fill="rgba(255,255,255,0.15)" stroke="#fff" stroke-width="1.5"/>
+                <path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="zk-banner-title" id="zk-title">Arquitectura de Conocimiento Cero <span class="zk-tag">Zero-Knowledge</span></h2>
+            </div>
+          </div>
+          <ul class="zk-list">
+            <li>Sus contraseñas y secretos se <strong>cifran localmente en su dispositivo</strong> antes de ser transmitidos o almacenados en nuestros servidores.</li>
+            <li>BioVault <strong>nunca tiene acceso</strong> a su clave maestra ni puede descifrar el contenido de su bóveda en ninguna circunstancia.</li>
+            <li>Usted es el <strong>único propietario</strong> de sus datos. Sin su clave, los datos son criptográficamente inaccesibles para cualquier tercero, incluido nuestro equipo.</li>
+            <li>En caso de pérdida de su clave maestra, <strong>no existe mecanismo de recuperación</strong> que comprometa su cifrado. La seguridad es absoluta e irreversible.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Datos Recopilados -->
+      <section id="datos-recogidos" class="policy-section fade-in" aria-labelledby="datos-title">
+        <div class="section-card">
+          <div class="section-header">
+            <span class="section-num">02</span>
+            <div class="section-icon icon-accent" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 11H4v-2h11v2zm3-4H4V9h14v2z" fill="#00C896"/></svg>
+            </div>
+            <h2 class="section-title" id="datos-title">Información que Recopilamos</h2>
+          </div>
+          <div class="section-body">
+            <p>BioVault aplica el principio de <strong>mínima recopilación de datos</strong>. Únicamente almacenamos la información estrictamente necesaria para el funcionamiento del servicio:</p>
+            <table class="data-table" aria-label="Tipos de datos recopilados">
+              <thead><tr><th scope="col">Tipo de dato</th><th scope="col">Descripción</th><th scope="col">Cifrado</th></tr></thead>
+              <tbody>
+                <tr><td><span class="td-label">Correo electrónico</span></td><td>Recopilado durante el registro. Se utiliza exclusivamente para la gestión de la cuenta, autenticación y notificaciones.</td><td style="color: var(--accent); font-family: var(--mono); font-size:0.78rem;">✓ En tránsito</td></tr>
+                <tr><td><span class="td-label">Datos de la bóveda</span></td><td>Títulos, usuarios y contraseñas. Se almacenan exclusivamente en formato cifrado (AES-256). BioVault nunca puede leer este contenido.</td><td style="color: var(--accent); font-family: var(--mono); font-size:0.78rem;">✓ E2EE completo</td></tr>
+                <tr><td><span class="td-label">Datos biométricos</span></td><td>BioVault utiliza las APIs nativas del sistema operativo únicamente para autenticación local. Nunca recopilamos ni almacenamos datos biométricos en nuestros servidores.</td><td style="color: var(--accent); font-family: var(--mono); font-size:0.78rem;">✓ Solo local</td></tr>
+              </tbody>
+            </table>
+            <div class="highlight-box green">
+              <p class="hb-label">Información no recopilada</p>
+              <p>BioVault <strong>no recopila</strong> datos de ubicación, lista de contactos, historial de navegación, identificadores publicitarios (AAID/IDFA), ni análisis de comportamiento personal identificable.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Permisos del Dispositivo (NEW FOR GOOGLE PLAY) -->
+      <section id="permisos" class="policy-section fade-in" aria-labelledby="permisos-title">
+        <div class="section-card">
+          <div class="section-header">
+            <span class="section-num">03</span>
+            <div class="section-icon icon-blue" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 18H7V5h10v14zm-5-1c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1z" fill="#4A9EFF"/></svg>
+            </div>
+            <h2 class="section-title" id="permisos-title">Permisos del Dispositivo</h2>
+          </div>
+          <div class="section-body">
+            <p>Para proporcionar sus funcionalidades básicas, BioVault puede solicitar acceso a las siguientes capacidades de su dispositivo. <strong>Ningún dato obtenido a través de estos permisos se envía a nuestros servidores:</strong></p>
+            <div class="rights-grid" role="list">
+              <div class="right-item" role="listitem">
+                <div class="right-item-header"><div class="right-dot" aria-hidden="true"></div><strong>Biometría (Huella/Facial)</strong></div>
+                <p>Se utiliza exclusivamente para desbloquear la aplicación de manera local mediante el Secure Enclave o Keystore de su dispositivo.</p>
+              </div>
+              <div class="right-item" role="listitem">
+                <div class="right-item-header"><div class="right-dot" aria-hidden="true"></div><strong>Cámara (Opcional)</strong></div>
+                <p>Solo se solicita si el usuario desea escanear códigos QR (por ejemplo, para configurar autenticación 2FA). Las imágenes no se guardan ni se transmiten.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Uso de Datos -->
+      <section id="uso-datos" class="policy-section fade-in" aria-labelledby="uso-title">
+        <div class="section-card">
+          <div class="section-header">
+            <span class="section-num">04</span>
+            <div class="section-icon icon-blue" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 11.75A1.25 1.25 0 107.75 13 1.25 1.25 0 009 11.75zM12 2a10 10 0 100 20A10 10 0 0012 2zm0 18a8 8 0 110-16 8 8 0 010 16zm3-6.25A1.25 1.25 0 1013.75 15 1.25 1.25 0 0015 13.75z" fill="#4A9EFF"/></svg>
+            </div>
+            <h2 class="section-title" id="uso-title">Cómo Utilizamos su Información</h2>
+          </div>
+          <div class="section-body">
+            <p>La información recopilada se utiliza <strong>exclusivamente</strong> para la autenticación segura, la sincronización de sus datos cifrados entre dispositivos autorizados, notificaciones críticas del servicio y soporte técnico explícitamente solicitado por usted.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Terceros -->
+      <section id="terceros" class="policy-section fade-in" aria-labelledby="terceros-title">
+        <div class="section-card">
+          <div class="section-header">
+            <span class="section-num">05</span>
+            <div class="section-icon icon-blue" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" fill="#4A9EFF"/></svg>
+            </div>
+            <h2 class="section-title" id="terceros-title">Compartición de Datos y Proveedores</h2>
+          </div>
+          <div class="section-body">
+            <p>BioVault <strong>no vende, comercializa, ni alquila</strong> su información personal a terceros bajo ninguna circunstancia. Utilizamos <strong>Supabase</strong> para el almacenamiento seguro de bases de datos y la autenticación de usuarios. Supabase cumple con certificaciones SOC 2 Type II e ISO 27001.</p>
+            <div class="highlight-box blue">
+              <p class="hb-label">Divulgación legal</p>
+              <p>Únicamente compartiremos información si existiera una obligación legal firme impuesta por autoridad competente. Sin embargo, al usar arquitectura Zero-Knowledge, no podemos entregar ni descifrar el contenido de sus bóvedas.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seguridad -->
+      <section id="seguridad" class="policy-section fade-in" aria-labelledby="seguridad-title">
+        <div class="section-card">
+          <div class="section-header">
+            <span class="section-num">06</span>
+            <div class="section-icon icon-accent" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" fill="#00C896"/></svg>
+            </div>
+            <h2 class="section-title" id="seguridad-title">Seguridad de los Datos</h2>
+          </div>
+          <div class="section-body">
+            <p>Implementamos cifrado de extremo a extremo (AES-256) antes de que los datos salgan de su dispositivo, protocolos de transporte HTTPS/TLS 1.3, y la verificación biométrica se procesa exclusivamente en el chip seguro de hardware de su teléfono inteligente.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Retención -->
+      <section id="retencion" class="policy-section fade-in" aria-labelledby="retencion-title">
+        <div class="section-card">
+          <div class="section-header">
+            <span class="section-num">07</span>
+            <div class="section-icon icon-blue" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0013 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z" fill="#4A9EFF"/></svg>
+            </div>
+            <h2 class="section-title" id="retencion-title">Retención de Datos</h2>
+          </div>
+          <div class="section-body">
+            <p>Los datos de su cuenta (email) y bóveda cifrada se conservan mientras la cuenta permanezca activa. Son eliminados de forma inmediata e irreversible al momento en que usted decide eliminar su cuenta.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Derechos -->
+      <section id="derechos" class="policy-section fade-in" aria-labelledby="derechos-title">
+        <div class="section-card">
+          <div class="section-header">
+            <span class="section-num">08</span>
+            <div class="section-icon icon-accent" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" fill="#00C896"/></svg>
+            </div>
+            <h2 class="section-title" id="derechos-title">Sus Derechos como Usuario</h2>
+          </div>
+          <div class="section-body">
+            <p>De acuerdo con el RGPD y normativas internacionales de privacidad, usted tiene derecho a: solicitar acceso a sus datos, rectificarlos, solicitar su eliminación (supresión), exportarlos (portabilidad), oponerse o limitar el tratamiento de los mismos. Atendemos todas las solicitudes en un plazo máximo legal de 30 días naturales.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Eliminación de Cuenta -->
+      <section id="eliminacion" class="policy-section fade-in" aria-labelledby="eliminacion-title">
+        <div class="section-card">
+          <div class="section-header">
+            <span class="section-num">09</span>
+            <div class="section-icon icon-warn" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z" fill="#FAAD14"/></svg>
+            </div>
+            <h2 class="section-title" id="eliminacion-title">Eliminación de Cuenta</h2>
+          </div>
+          <div class="section-body">
+            <p>Usted tiene el derecho irrenunciable de eliminar su cuenta en cualquier momento. Esto es permanente e irreversible.</p>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:10px; margin-top:12px;">
+              <li style="display:flex; gap:10px; align-items:flex-start; font-size:0.92rem; color:var(--text-secondary);">
+                <span style="color:var(--accent); font-family:var(--mono); font-size:0.85rem; margin-top:2px; flex-shrink:0;">01 →</span>
+                <span><strong style="color:var(--text-primary)">Desde la aplicación:</strong> Navegue a <em>Ajustes → Cuenta → Eliminar cuenta</em>.</span>
+              </li>
+              <li style="display:flex; gap:10px; align-items:flex-start; font-size:0.92rem; color:var(--text-secondary);">
+                <span style="color:var(--accent); font-family:var(--mono); font-size:0.85rem; margin-top:2px; flex-shrink:0;">02 →</span>
+                <span><strong style="color:var(--text-primary)">Por correo:</strong> Envíe una solicitud a <a href="mailto:privacidad@biovault.app" style="color:var(--accent)">privacidad@biovault.app</a>.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Privacidad Infantil (NEW FOR GOOGLE PLAY) -->
+      <section id="menores" class="policy-section fade-in" aria-labelledby="menores-title">
+        <div class="section-card">
+          <div class="section-header">
+            <span class="section-num">10</span>
+            <div class="section-icon icon-blue" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="#4A9EFF"/></svg>
+            </div>
+            <h2 class="section-title" id="menores-title">Privacidad Infantil</h2>
+          </div>
+          <div class="section-body">
+            <p>BioVault no está dirigida a menores de 13 años (o la edad mínima legal equivalente en su jurisdicción). <strong>No recopilamos conscientemente información personal de niños</strong>.</p>
+            <p>Si usted es padre, madre o tutor legal y cree que su hijo nos ha proporcionado información personal, por favor contáctenos inmediatamente en <a href="mailto:privacidad@biovault.app" style="color:var(--accent)">privacidad@biovault.app</a> para que procedamos a la eliminación inmediata de dicha cuenta y datos de nuestros servidores.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cookies -->
+      <section id="cookies" class="policy-section fade-in" aria-labelledby="cookies-title">
+        <div class="section-card">
+          <div class="section-header">
+            <span class="section-num">11</span>
+            <div class="section-icon icon-blue" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="#4A9EFF"/></svg>
+            </div>
+            <h2 class="section-title" id="cookies-title">Política de Cookies</h2>
+          </div>
+          <div class="section-body">
+            <p>Nuestra aplicación móvil <strong>no utiliza cookies de seguimiento, análisis ni publicidad</strong>. Somos un servicio libre de anuncios y libre de rastreadores.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cambios -->
+      <section id="cambios" class="policy-section fade-in" aria-labelledby="cambios-title">
+        <div class="section-card">
+          <div class="section-header">
+            <span class="section-num">12</span>
+            <div class="section-icon icon-blue" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 2h-2V0h-2v2H8V0H6v2H4C2.9 2 2 2.9 2 4v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H4V8h14v12zm0-14H4V4h14v2z" fill="#4A9EFF"/></svg>
+            </div>
+            <h2 class="section-title" id="cambios-title">Cambios en esta Política</h2>
+          </div>
+          <div class="section-body">
+            <p>Nos reservamos el derecho de actualizar esta Política de Privacidad. Ante cualquier cambio sustancial, notificaremos a los usuarios mediante un aviso destacado dentro de la aplicación o por correo electrónico, solicitando su consentimiento renovado si la ley lo requiere.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contacto -->
+      <section id="contacto" class="policy-section fade-in" aria-labelledby="contacto-title">
+        <div class="contact-card">
+          <h2 id="contacto-title">¿Preguntas sobre su privacidad?</h2>
+          <p>Si tiene alguna consulta, inquietud o desea ejercer alguno de sus derechos, nuestro equipo de privacidad está disponible para atenderle.</p>
+          <a href="mailto:privacidad@biovault.app" class="contact-email">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg>
+            privacidad@biovault.app
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo" aria-hidden="true">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 2C7.24 2 5 4.24 5 7v1H3v10h14V8h-2V7c0-2.76-2.24-5-5-5zm0 2c1.66 0 3 1.34 3 3v1H7V7c0-1.66 1.34-3 3-3zm0 7a2 2 0 110 4 2 2 0 010-4z" fill="#fff"/></svg>
+      </div>
+      <span class="footer-name">BioVault</span>
+    </div>
+    <p class="footer-copy">&copy; 2026 BioVault. Todos los derechos reservados.<br><a href="mailto:privacidad@biovault.app">privacidad@biovault.app</a></p>
+    <div class="footer-right">
+      <span>Política de Privacidad v2.1</span>
+      <span style="margin-top:2px; color: var(--accent);">Conforme a RGPD, COPPA y Google Play</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const progressBar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = docHeight > 0 ? (window.scrollY / docHeight) * 100 + '%' : '0%';
+  }, { passive: true });
+
+  const navLinks = document.querySelectorAll('.sidebar-nav a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const activeLink = document.querySelector(`.sidebar-nav a[href="#${entry.target.id}"]`);
+        if (activeLink) activeLink.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector(link.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
